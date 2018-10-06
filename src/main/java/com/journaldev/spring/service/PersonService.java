@@ -21,5 +21,7 @@ public interface PersonService {
     public void removePupil(int id);
 	public void removeBook(int id);
 	public List<Books> showPupilBooks(int id);
-//	public List<Books> pupilsBooks(Pupils p);
+    public Pupils showPupil(int pupilId);
+    public void addBookToPupil(int pupilId,int bookId);
+	public void updatePupil(int pupilId);
 }

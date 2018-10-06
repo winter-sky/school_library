@@ -49,13 +49,7 @@ public class PersonController {
         return "books";
     }
 
-//    @RequestMapping(value = "/pupils_books", method = RequestMethod.GET)
-//    public String showPupilBooks(@ModelAttribute("pupils") Pupils p,Model model) {
-//      //TODO
-//        model.addAttribute("books", new Books());
-//        model.addAttribute("showPupilBooks", this.personService.showPupilBooks(p.getPupilId()));
-//        return "pupils_books";
-//    }
+
 
     @RequestMapping(value = "/pupils_books/{id}", method = RequestMethod.GET)
     public String showPupilBooks(@PathVariable("id") int id,Model model) {
@@ -82,18 +76,20 @@ public class PersonController {
     @RequestMapping(value= "/pupils/add", method = RequestMethod.POST)
     public String addPerson(@ModelAttribute("pupils") Pupils p){
         System.out.println("XXXXXX Add person [name=" + p.getName() + ", country=" + p.getGrade() + ']');
-            //new person, add it
+
             this.personService.addPupil(p);
 
         return "redirect:/pupils";
     }
+
 
     @RequestMapping(value= "/book/add", method = RequestMethod.POST)
     public String addBook(@ModelAttribute("books") Books b){
         this.personService.addBook(b);
         return "redirect:/books";
     }
-	
+
+
 	@RequestMapping("/remove/{id}")
     public String removePerson(@PathVariable("id") int id){
 		
@@ -128,5 +124,19 @@ public class PersonController {
         model.addAttribute("listPersons", this.personService.listPersons());
         return "person";
     }
-	
+
+    @RequestMapping(value = "/add_pupil_book/{id}", method = RequestMethod.GET)
+    public String showPupil(@PathVariable("id") int id,Model model) {
+        model.addAttribute("showPupil", this.personService.showPupil(id));
+        model.addAttribute("listBooks", this.personService.listBooks());
+        return "add_pupil_book";
+    }
+
+    @RequestMapping(value = "/addBookToPupil/{pupilId}/{bookId}", method = RequestMethod.GET)
+    public String addBookToPupil(@PathVariable("pupilId") int pupilId,@PathVariable("bookId") int bookId) {
+    this.personService.addBookToPupil(pupilId,bookId);
+    //this.personService.updatePupil(pupilId);
+        return "redirect:/pupils";
+    }
+
 }

@@ -1,4 +1,5 @@
 package com.journaldev.spring.model;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -13,8 +14,13 @@ public class Pupils {
     private String name;
     private String grade;
 
-    @OneToMany(mappedBy = "pupil")
-    private Set<Books> books;
+    @OneToMany//(mappedBy = "pupil")
+    @JoinTable(
+            name = "pupils_books",
+            joinColumns = { @JoinColumn(name = "pupil_id") },
+            inverseJoinColumns = { @JoinColumn(name = "book") }
+    )
+    private List<Books> books;
 
     public String getName() {
         return name;
@@ -40,12 +46,14 @@ public class Pupils {
         this.grade = grade;
     }
 
-    public Set<Books> getBooks() {
+    public List<Books> getBooks() {
         return books;
     }
 
-    public void setBooks(Set<Books> books) {
+    public void setBooks(List<Books> books) {
         this.books = books;
     }
+
+    public void setBook (Books book){books.add(book);}
 
 }

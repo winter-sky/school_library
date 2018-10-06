@@ -79,38 +79,20 @@
             <th width="120">Pupil Grade</th>
             <th width="60">Show</th>
             <th width="60">Delete</th>
+            <th width="60">Add book</th>
         </tr>
         <c:forEach items="${listPupils}" var="pupils">
             <tr>
                 <td>${pupils.pupilId}</td>
                 <td>${pupils.name}</td>
                 <td>${pupils.grade}</td>
-                <td><a href="<c:url value='/pupils_books/${pupils.pupilId}' />" >Show</a></td>
+                <td><a href="<c:url value='/pupils_books/${pupils.pupilId}' />" >Show pupil's books</a></td>
                 <td><a href="<c:url value='/removepupil/${pupils.pupilId}' />" >Delete</a></td>
+                <td><a href="<c:url value='/add_pupil_book/${pupils.pupilId}' />" >Add book</a></td>
             </tr>
         </c:forEach>
     </table>
 
 </c:if>
-<%--<c:if test="${!empty pupils.books}">--%>
-    <%--<table class="tg">--%>
-        <%--<tr>--%>
-            <%--<th width="80">Book ID</th>--%>
-            <%--<th width="120">Book Name</th>--%>
-            <%--<th width="120">Book Genre</th>--%>
-            <%--<th width="120">Book Country</th>--%>
-            <%--<th width="60">Delete</th>--%>
-        <%--</tr>--%>
-        <%--<c:forEach items="${pupils.books}" var="books">--%>
-            <%--<tr>--%>
-                <%--<td>${books.bookId}</td>--%>
-                <%--<td>${books.name}</td>--%>
-                <%--<td>${books.genre}</td>--%>
-                <%--<td>${books.country}</td>--%>
-                <%--<td><a href="<c:url value='/removebook/${books.bookId}' />" >Delete</a></td>--%>
-            <%--</tr>--%>
-        <%--</c:forEach>--%>
-    <%--</table>--%>
-<%--</c:if>--%>
 </body>
 </html>

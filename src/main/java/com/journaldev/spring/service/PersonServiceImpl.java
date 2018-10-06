@@ -79,7 +79,15 @@ public class PersonServiceImpl implements PersonService {
         return personDAO.showPupilBooks(id);
     }
 
-//	@Override
-//	@Transactional
-//	public List<Books> pupilsBooks(Pupils p){return personDAO.pupilsBooks(p);}
+	@Override
+	@Transactional
+    public Pupils showPupil(int pupilId){return personDAO.showPupil(pupilId);}
+
+    @Override
+    @Transactional
+    public void addBookToPupil(int pupilId,int bookId){this.personDAO.addBookToPupil(pupilId,bookId);}
+
+	@Override
+	@Transactional
+	public void updatePupil(int pupilId){this.personDAO.updatePupil(pupilId);}
 }

@@ -23,15 +23,14 @@ public class Books {
     @Column(name = "country")
     private String country;
 
-    @ManyToOne
-    @JoinTable(
-            name = "pupils_books",
-            joinColumns = { @JoinColumn(name = "book_id") },
-            inverseJoinColumns = { @JoinColumn(name = "pupil_id") }
-    )
-
-    // TODO: do we need this?
-    private Pupils pupil;
+//    @ManyToOne
+//    @JoinTable(
+//            name = "pupils_books",
+//            joinColumns = { @JoinColumn(name = "book") },//book_id исправила на book
+//            //в базе данных в связующей таблице
+//            inverseJoinColumns = { @JoinColumn(name = "pupil_id") }
+//    )
+//    private Pupils pupil;
 
     public int getBookId() {
         return bookId;
@@ -73,11 +72,11 @@ public class Books {
         this.country = country;
     }
 
-    public Pupils getPupil() {
-        return pupil;
-    }
-
-    public void setPupil(Pupils pupil) {
-        this.pupil = pupil;
-    }
+//    public Pupils getPupil() {
+//        return pupil;
+//    }
+//
+//    public void setPupil(Pupils pupil) {
+//        this.pupil = pupil;
+//    }
 }

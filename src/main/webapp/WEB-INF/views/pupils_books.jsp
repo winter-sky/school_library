@@ -23,6 +23,7 @@
         <tr>
             <th width="80">Book ID</th>
             <th width="120">Book Name</th>
+            <th width="120">Book Author</th>
             <th width="120">Book Genre</th>
             <th width="120">Book Country</th>
             <th width="60">Delete</th>
@@ -31,6 +32,7 @@
             <tr>
                 <td>${books.bookId}</td>
                 <td>${books.name}</td>
+                <td>${books.author}</td>
                 <td>${books.genre}</td>
                 <td>${books.country}</td>
                 <td><a href="<c:url value='/removebook/${books.bookId}' />" >Delete</a></td>

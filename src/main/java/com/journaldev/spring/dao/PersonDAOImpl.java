@@ -1,5 +1,6 @@
 package com.journaldev.spring.dao;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,6 +44,16 @@ public class PersonDAOImpl implements PersonDAO {
         session.persist(p);
         System.out.println("XXXXXX Add person [name=" + p.getName() + ", country=" + p.getGrade() + ']');
         logger.info("Pupil saved successfully, Person Details="+p);
+    }
+
+    @Override
+    public void addPupilBook(Books b,int pupilId){
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Pupils where pupil_id=:pupilId");
+        query.setParameter("pupilId", pupilId);
+        Pupils pupil = (Pupils)query.uniqueResult();
+        pupil.setBook(b);
+        session.persist(b);
     }
 
     @Override
@@ -106,42 +117,16 @@ public class PersonDAOImpl implements PersonDAO {
         assert pupils.size() <= 1;
 
         if (!pupils.isEmpty()) {
-            Set<Books> booksList = pupils.get(0).getBooks();
+            List<Books> booksList = pupils.get(0).getBooks();
 
             for (Books b : booksList) {
                 logger.info("Books List::" + b);
             }
-            System.out.println("xxx");
             return new ArrayList<Books>(booksList);
         }
 
         return Collections.emptyList();
     }
-
-//    @Override
-//    public List<Books> pupilsBooks(Pupils p){
-//        Session session = this.sessionFactory.getCurrentSession();
-//        System.out.printf("Show pupil books: " + p.getPupilId());
-//
-//        Query query = session.createQuery("from Pupils where pupil_id=:pupilId");
-//
-//        query.setParameter("pupilId", p.getPupilId());
-//
-//        List<Pupils> pupils = query.list();
-//
-//        assert pupils.size() <= 1;
-//
-//        if (!pupils.isEmpty()) {
-//            Set<Books> booksList = pupils.get(0).getBooks();
-//
-//            for (Books b : booksList) {
-//                logger.info("Books List::" + b);
-//            }
-//            return new ArrayList<Books>(booksList);
-//        }
-//
-//        return Collections.emptyList();
-//    }
 
 	@Override
 	public Person getPersonById(int id) {
@@ -180,4 +165,43 @@ public class PersonDAOImpl implements PersonDAO {
         }
         logger.info("Book deleted successfully, person details="+b);}
 
+
+    @Override
+    public Pupils showPupil(int pupilId){
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Pupils where pupil_id=:pupilId");
+
+        query.setParameter("pupilId", pupilId);
+
+        Pupils pupil = (Pupils)query.uniqueResult();
+        return pupil;
+    }
+
+    @Override
+    public void addBookToPupil(int pupilId,int bookId){
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Pupils where pupil_id=:pupilId");
+        query.setParameter("pupilId", pupilId);
+        Pupils pupil = (Pupils)query.uniqueResult();
+        System.out.println(pupil.getName());
+        System.out.println("Было столько книг "+pupil.getBooks());
+
+        Query query2 = session.createQuery("from Books where book_id=:bookId");
+        query2.setParameter("bookId", bookId);
+        Books book = (Books)query2.uniqueResult();
+        System.out.println(book.getName());
+        pupil.setBook(book);
+        System.out.println("Стало столько книг "+pupil.getBooks());
+        //session.merge(pupil);
+
+    }
+
+    @Override
+    public void updatePupil(int pupilId) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Pupils where pupil_id=:pupilId");
+        query.setParameter("pupilId", pupilId);
+        Pupils p = (Pupils)query.uniqueResult();
+        session.update(p);
+    }
 }

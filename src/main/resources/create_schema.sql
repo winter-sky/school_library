@@ -35,6 +35,6 @@ create table pupils_books
   pupil_id integer NOT NULL,
   date_taken datetime DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT id_pk PRIMARY KEY (id),
-  FOREIGN KEY (book_id) REFERENCES books(book_id),
-  FOREIGN KEY (pupil_id) REFERENCES pupils(pupil_id)
+  FOREIGN KEY (book_id) REFERENCES books(book_id) ON DELETE CASCADE,
+  FOREIGN KEY (pupil_id) REFERENCES pupils(pupil_id ) ON DELETE CASCADE
 );
