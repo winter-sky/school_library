@@ -14,7 +14,7 @@ public class Pupils {
     private String name;
     private String grade;
 
-    @OneToMany//(mappedBy = "pupil")
+    @OneToMany//(fetch = FetchType.LAZY)
     @JoinTable(
             name = "pupils_books",
             joinColumns = { @JoinColumn(name = "pupil_id") },

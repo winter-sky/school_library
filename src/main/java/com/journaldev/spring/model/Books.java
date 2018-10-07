@@ -23,14 +23,16 @@ public class Books {
     @Column(name = "country")
     private String country;
 
-//    @ManyToOne
-//    @JoinTable(
-//            name = "pupils_books",
-//            joinColumns = { @JoinColumn(name = "book") },//book_id исправила на book
-//            //в базе данных в связующей таблице
-//            inverseJoinColumns = { @JoinColumn(name = "pupil_id") }
-//    )
-//    private Pupils pupil;
+ /*   @ManyToOne//(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "pupils_books",
+            joinColumns = { @JoinColumn(name = "book"//,insertable = false,updatable = false
+            )},//book_id исправила на book
+            //в базе данных в связующей таблице
+            inverseJoinColumns = { @JoinColumn(name = "pupil_id" //,insertable = false, updatable = false
+            ) }
+    )
+    private Pupils pupil;*/
 
     public int getBookId() {
         return bookId;
@@ -71,6 +73,7 @@ public class Books {
     public void setCountry(String country) {
         this.country = country;
     }
+
 
 //    public Pupils getPupil() {
 //        return pupil;
