@@ -21,8 +21,8 @@ public interface PersonDAO {
     public void removePupil(int id);
 	public void removeBook(int id);
     public List<Books> showPupilBooks(int pupilId);
-    public void addPupilBook(Books b,int pupilId);
     public Pupils showPupil(int pupilId);
     public void addBookToPupil(int pupilId,int bookId);
 	public void updatePupil(int pupilId);
-}
+	public List<Books> getFreeBooks();
+};
