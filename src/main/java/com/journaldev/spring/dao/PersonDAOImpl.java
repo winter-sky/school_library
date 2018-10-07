@@ -17,9 +17,15 @@ import org.springframework.stereotype.Repository;
 
 import com.journaldev.spring.model.Person;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 @Repository
 public class PersonDAOImpl implements PersonDAO {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(PersonDAOImpl.class);
 
 	private SessionFactory sessionFactory;
@@ -46,15 +52,15 @@ public class PersonDAOImpl implements PersonDAO {
         logger.info("Pupil saved successfully, Person Details="+p);
     }
 
-    @Override
-    public void addPupilBook(Books b,int pupilId){
-        Session session = this.sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Pupils where pupil_id=:pupilId");
-        query.setParameter("pupilId", pupilId);
-        Pupils pupil = (Pupils)query.uniqueResult();
-        pupil.setBook(b);
-        session.persist(b);
-    }
+//    @Override
+//    public void addPupilBook(Books b,int pupilId){
+//        Session session = this.sessionFactory.getCurrentSession();
+//        Query query = session.createQuery("from Pupils where pupil_id=:pupilId");
+//        query.setParameter("pupilId", pupilId);
+//        Pupils pupil = (Pupils)query.uniqueResult();
+//        pupil.setBook(b);
+//        session.persist(b);
+//    }
 
     @Override
     public void addBook(Books b){
@@ -83,13 +89,20 @@ public class PersonDAOImpl implements PersonDAO {
 
 	@Override
 	public List<Pupils> listPupils(){
-		Session session = this.sessionFactory.getCurrentSession();
-		List<Pupils> pupilsList = session.createQuery("from Pupils").list();
-		for(Pupils p : pupilsList){
-			logger.info("Pupil List::"+p);
-		}
-		System.out.println("xxx");
-		return pupilsList;
+        Session session = this.sessionFactory.getCurrentSession();
+        return session.createCriteria(Pupils.class).list();
+       // CriteriaQuery<Pupils> query = builder.createQuery(Pupils.class);
+//        Root<Pupils> pupilsRoot = query.from( Pupils.class );
+//        List<Pupils> result = session.createQuery(query).getResultList();
+//        System.out.println(result);
+//        return result;
+
+//		Session session = this.sessionFactory.getCurrentSession();
+//		List<Pupils> pupilsList = session.createQuery("from Pupils").list();
+//		for(Pupils p : pupilsList){
+//			logger.info("Pupil List::"+p);
+//		}
+//		return pupilsList;
 	};
 
     @Override
@@ -99,7 +112,6 @@ public class PersonDAOImpl implements PersonDAO {
         for(Books b : booksList){
             logger.info("Books List::"+b);
         }
-        System.out.println("xxx");
         return booksList;
     }
 
@@ -204,4 +216,15 @@ public class PersonDAOImpl implements PersonDAO {
         Pupils p = (Pupils)query.uniqueResult();
         session.update(p);
     }
+
+    @Override
+    public List<Books> getFreeBooks(){
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Books> booksList = session.createQuery("from Books").list();
+        for(Books b : booksList){
+
+            logger.info("Books List::"+b);
+        }
+        return booksList;
+    };
 }
