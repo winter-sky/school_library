@@ -31,10 +31,10 @@ create table pupils
 create table pupils_books
 (
   id integer NOT NULL AUTO_INCREMENT,
-  book_id integer NOT NULL,
+  book integer NOT NULL,
   pupil_id integer NOT NULL,
   date_taken datetime DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT id_pk PRIMARY KEY (id),
-  FOREIGN KEY (book_id) REFERENCES books(book_id) ON DELETE CASCADE,
+  FOREIGN KEY (book) REFERENCES books(book_id) ON DELETE CASCADE,
   FOREIGN KEY (pupil_id) REFERENCES pupils(pupil_id ) ON DELETE CASCADE
 );
