@@ -149,10 +149,11 @@ public class PersonDAOImpl implements PersonDAO {
     public void removePupil(int id){
         Session session = this.sessionFactory.getCurrentSession();
         Pupils p = (Pupils) session.load(Pupils.class, id);
-        if(null != p){
+        if(p.getBooks().isEmpty()){
             session.delete(p);
+            logger.info("Pupil deleted successfully, pupils details="+p);
         }
-        logger.info("Pupil deleted successfully, person details="+p);
+        logger.info("Pupil is not deleted, pupils details="+p);
     }
 
     @Override
