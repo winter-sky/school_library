@@ -2,10 +2,12 @@ package com.journaldev.spring;
 
 import com.journaldev.spring.model.Books;
 import com.journaldev.spring.model.Pupils;
+import com.journaldev.spring.service.BooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.journaldev.spring.model.Person;
 import com.journaldev.spring.service.PersonService;
+
+import com.journaldev.spring.model.Pupils;
+import com.journaldev.spring.service.PupilsService;
 
 import java.util.List;
 
@@ -26,6 +31,22 @@ public class PersonController {
 	public void setPersonService(PersonService ps){
 		this.personService = ps;
 	}
+
+    private PupilsService pupilsService;
+
+    @Autowired(required=true)
+    @Qualifier(value="pupilsService")
+    public void setPupilsService(PupilsService ps){
+        this.pupilsService = ps;
+    }
+
+    private BooksService booksService;
+
+    @Autowired(required=true)
+    @Qualifier(value="booksService")
+    public void setBooksService(BooksService bs){
+        this.booksService = bs;
+    }
 	
 	@RequestMapping(value = "/persons", method = RequestMethod.GET)
 	public String listPersons(Model model) {
@@ -97,11 +118,16 @@ public class PersonController {
         return "redirect:/persons";
     }
 
-    @RequestMapping("/removepupil/{id}")
-    public String removePupil(@PathVariable("id") int id){
+    @RequestMapping("/removepupil/{pupilId}")
+    public String removePupil(@PathVariable("pupilId") int pupilId, ModelMap model){
 
-        this.personService.removePupil(id);
-        return "redirect:/pupils";
+        this.personService.removePupil(pupilId);
+       // return "redirect:/pupils";
+        if (this.pupilsService.checkContainsOrNot(pupilId))
+            model.addAttribute("message", "Pupil cannot be deleted from table before " +
+                    "returning books");
+        else model.addAttribute("message", " Delete successful");
+        return "checkDeleteOrNot";
     }
 
     @RequestMapping("/showpupil/{id}")
@@ -111,11 +137,16 @@ public class PersonController {
         return "redirect:/pupils_books";
     }
 
-    @RequestMapping("/removebook/{id}")
-    public String removeBook(@PathVariable("id") int id){
+    @RequestMapping("/removebook/{bookId}")
+    public String removeBook(@PathVariable("bookId") int bookId,ModelMap model){
 
-        this.personService.removeBook(id);
-        return "redirect:/books";
+        this.personService.removeBook(bookId);
+        if (this.booksService.checkContainsOrNot(bookId))
+            model.addAttribute("message", "Book cannot be deleted from table before " +
+                    "pupil returns this books");
+        else model.addAttribute("message", " Delete successful");
+        return "checkDeleteOrNot";
+        //return "redirect:/books";
     }
 
     @RequestMapping("/edit/{id}")
@@ -128,7 +159,10 @@ public class PersonController {
     @RequestMapping(value = "/add_pupil_book/{id}", method = RequestMethod.GET)
     public String showPupil(@PathVariable("id") int id,Model model) {
         model.addAttribute("showPupil", this.personService.showPupil(id));
-        model.addAttribute("listBooks", this.personService.listBooks());
+       // model.addAttribute("listBooks", this.personService.listBooks());
+
+        model.addAttribute("getFreeBooks", this.personService.getFreeBooks());
+       // this.personService.updatePupil(id);
         return "add_pupil_book";
     }
 
@@ -138,5 +172,22 @@ public class PersonController {
     //this.personService.updatePupil(pupilId);
         return "redirect:/pupils";
     }
+
+
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+        public String printHello(ModelMap model) {
+            model.addAttribute("message", "Hello Spring MVC Framework!");
+            return "hello";
+
+    }
+
+    @RequestMapping(value = "/checkDeleteOrNot/{pupilId}", method = RequestMethod.GET)
+    public String checkDelete(@PathVariable("pupilId") int pupilId,ModelMap model) {
+	    if (this.pupilsService.checkContainsOrNot(pupilId))
+	    model.addAttribute("message", "Pupil is not deleted");
+	    else model.addAttribute("message", "Pupil is deleted");
+        return "checkDeleteOrNot";
+    }
+
 
 }

@@ -18,7 +18,7 @@
     Add a Book
 </h1>
 <%--<c:url var="addAction" value="/book/add" >blabla</c:url>--%>
-<form:form action="/book/add" commandName="books" method = "GET">
+<form:form action="/book/add" commandName="books">
     <table>
         <c:if test="${!empty books.name}">
             <tr>

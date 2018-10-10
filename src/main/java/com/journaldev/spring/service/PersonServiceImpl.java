@@ -90,4 +90,8 @@ public class PersonServiceImpl implements PersonService {
 	@Override
 	@Transactional
 	public void updatePupil(int pupilId){this.personDAO.updatePupil(pupilId);}
+
+	@Override
+	@Transactional
+	public List<Books> getFreeBooks(){return this.personDAO.getFreeBooks();}
 }

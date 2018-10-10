@@ -24,4 +24,5 @@ public interface PersonService {
     public Pupils showPupil(int pupilId);
     public void addBookToPupil(int pupilId,int bookId);
 	public void updatePupil(int pupilId);
+	public List<Books> getFreeBooks();
 }

@@ -30,7 +30,7 @@
     </table>
 </c:if>
 <h3>Books List</h3>
-<c:if test="${!empty listBooks}">
+<c:if test="${!empty getFreeBooks}">
     <table class="tg">
         <tr>
             <th width="80">Book ID</th>
@@ -39,7 +39,7 @@
             <th width="120">Book Genre</th>
             <th width="120">Book Country</th>
         </tr>
-        <c:forEach items="${listBooks}" var="books">
+        <c:forEach items="${getFreeBooks}" var="books">
             <tr>
                 <td>${books.bookId}</td>
                 <td>${books.name}</td>

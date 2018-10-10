@@ -91,11 +91,6 @@ public class PersonDAOImpl implements PersonDAO {
 	public List<Pupils> listPupils(){
         Session session = this.sessionFactory.getCurrentSession();
         return session.createCriteria(Pupils.class).list();
-       // CriteriaQuery<Pupils> query = builder.createQuery(Pupils.class);
-//        Root<Pupils> pupilsRoot = query.from( Pupils.class );
-//        List<Pupils> result = session.createQuery(query).getResultList();
-//        System.out.println(result);
-//        return result;
 
 //		Session session = this.sessionFactory.getCurrentSession();
 //		List<Pupils> pupilsList = session.createQuery("from Pupils").list();
@@ -171,11 +166,23 @@ public class PersonDAOImpl implements PersonDAO {
     @Override
     public void removeBook(int id){
         Session session = this.sessionFactory.getCurrentSession();
+        List<Pupils> pupilsList = session.createQuery("from Pupils").list();
+
+        List<Books> listAllBooks=session.createCriteria(Books.class).list();
+
+        for(Pupils p : pupilsList){
+            List<Books> listPupilBooks = p.getBooks();
+            listAllBooks.removeAll(listPupilBooks);
+        }
+        System.out.println("listAllPupilsBooks"+listAllBooks);
+
+        List<Books> listFreeBooks=listAllBooks;
+
         Books b = (Books) session.load(Books.class, id);
-        if(null != b){
+        if(listFreeBooks.contains(b)){
             session.delete(b);
         }
-        logger.info("Book deleted successfully, person details="+b);}
+        logger.info("Book deleted successfully, book details="+b);}
 
 
     @Override
@@ -220,11 +227,20 @@ public class PersonDAOImpl implements PersonDAO {
     @Override
     public List<Books> getFreeBooks(){
         Session session = this.sessionFactory.getCurrentSession();
-        List<Books> booksList = session.createQuery("from Books").list();
-        for(Books b : booksList){
+        List<Pupils> pupilsList = session.createQuery("from Pupils").list();
 
-            logger.info("Books List::"+b);
+        List<Books> listAllBooks=session.createCriteria(Books.class).list();
+
+        for(Pupils p : pupilsList){
+            List<Books> listPupilBooks = p.getBooks();
+            listAllBooks.removeAll(listPupilBooks);
         }
-        return booksList;
+        System.out.println("listAllPupilsBooks"+listAllBooks);
+
+        List<Books> listFreeBooks=listAllBooks;
+
+        System.out.println("listFreeBooks "+listFreeBooks);
+
+        return listFreeBooks;
     };
 }
