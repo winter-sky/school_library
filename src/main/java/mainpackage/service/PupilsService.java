@@ -1,4 +1,4 @@
-package com.journaldev.spring.service;
+package mainpackage.service;
 
 public interface PupilsService {
     public boolean checkContainsOrNot(int pupilId);

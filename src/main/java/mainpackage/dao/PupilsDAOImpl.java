@@ -1,6 +1,6 @@
-package com.journaldev.spring.dao;
+package mainpackage.dao;
 
-import com.journaldev.spring.model.Pupils;
+import mainpackage.model.Pupils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

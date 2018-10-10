@@ -1,12 +1,12 @@
-package com.journaldev.spring.service;
+package mainpackage.dao;
 
 import java.util.List;
 
-import com.journaldev.spring.model.Books;
-import com.journaldev.spring.model.Person;
-import com.journaldev.spring.model.Pupils;
+import mainpackage.model.Books;
+import mainpackage.model.Person;
+import mainpackage.model.Pupils;
 
-public interface PersonService {
+public interface PersonDAO {
 
 	public void addPerson(Person p);
 	public void updatePerson(Person p);
@@ -15,14 +15,14 @@ public interface PersonService {
 	public void removePerson(int id);
 
 	public List<Pupils> listPupils();
-	public void addPupil(Pupils p);
+    public void addPupil(Pupils p);
 	public void addBook(Books b);
 	public List<Books> listBooks();
     public void removePupil(int id);
 	public void removeBook(int id);
-	public List<Books> showPupilBooks(int id);
+    public List<Books> showPupilBooks(int pupilId);
     public Pupils showPupil(int pupilId);
     public void addBookToPupil(int pupilId,int bookId);
 	public void updatePupil(int pupilId);
 	public List<Books> getFreeBooks();
-}
+};

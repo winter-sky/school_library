@@ -39,9 +39,9 @@
         <beans:property name="dataSource" ref="dataSource" />
         <beans:property name="annotatedClasses">
             <beans:list>
-                <beans:value>com.journaldev.spring.model.Person</beans:value>
-                <beans:value>com.journaldev.spring.model.Pupils</beans:value>
-                <beans:value>com.journaldev.spring.model.Books</beans:value>
+                <beans:value>mainpackage.model.Person</beans:value>
+                <beans:value>mainpackage.model.Pupils</beans:value>
+                <beans:value>mainpackage.model.Books</beans:value>
             </beans:list>
         </beans:property>
         <beans:property name="hibernateProperties">
@@ -53,25 +53,25 @@
         </beans:property>
     </beans:bean>
 
-    <beans:bean id="personDAO" class="com.journaldev.spring.dao.PersonDAOImpl">
+    <beans:bean id="personDAO" class="mainpackage.dao.PersonDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="personService" class="com.journaldev.spring.service.PersonServiceImpl">
+    <beans:bean id="personService" class="mainpackage.service.PersonServiceImpl">
         <beans:property name="personDAO" ref="personDAO"></beans:property>
     </beans:bean>
-    <beans:bean id="pupilsDAO" class="com.journaldev.spring.dao.PupilsDAOImpl">
+    <beans:bean id="pupilsDAO" class="mainpackage.dao.PupilsDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="pupilsService" class="com.journaldev.spring.service.PupilsServiceImpl">
+    <beans:bean id="pupilsService" class="mainpackage.service.PupilsServiceImpl">
         <beans:property name="pupilsDAO" ref="pupilsDAO"></beans:property>
     </beans:bean>
-    <beans:bean id="booksDAO" class="com.journaldev.spring.dao.BooksDAOImpl">
+    <beans:bean id="booksDAO" class="mainpackage.dao.BooksDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="booksService" class="com.journaldev.spring.service.BooksServiceImpl">
+    <beans:bean id="booksService" class="mainpackage.service.BooksServiceImpl">
         <beans:property name="booksDAO" ref="booksDAO"></beans:property>
     </beans:bean>
-    <context:component-scan base-package="com.journaldev.spring" />
+    <context:component-scan base-package="mainpackage" />
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 

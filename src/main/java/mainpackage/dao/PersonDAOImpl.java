@@ -1,13 +1,11 @@
-package com.journaldev.spring.dao;
+package mainpackage.dao;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
-import com.journaldev.spring.model.Books;
-import com.journaldev.spring.model.Pupils;
+import mainpackage.model.Books;
+import mainpackage.model.Pupils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,13 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.journaldev.spring.model.Person;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import mainpackage.model.Person;
 
 @Repository
 public class PersonDAOImpl implements PersonDAO {

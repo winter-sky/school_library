@@ -1,7 +1,6 @@
-package com.journaldev.spring.service;
+package mainpackage.service;
 
-import com.journaldev.spring.dao.PersonDAO;
-import com.journaldev.spring.dao.PupilsDAO;
+import mainpackage.dao.PupilsDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

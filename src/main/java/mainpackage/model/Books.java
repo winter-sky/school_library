@@ -1,4 +1,4 @@
-package com.journaldev.spring.model;
+package mainpackage.model;
 
 
 import javax.persistence.*;

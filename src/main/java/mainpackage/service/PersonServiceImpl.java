@@ -1,14 +1,14 @@
-package com.journaldev.spring.service;
+package mainpackage.service;
 
 import java.util.List;
 
-import com.journaldev.spring.model.Books;
-import com.journaldev.spring.model.Pupils;
+import mainpackage.model.Books;
+import mainpackage.model.Pupils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.journaldev.spring.dao.PersonDAO;
-import com.journaldev.spring.model.Person;
+import mainpackage.dao.PersonDAO;
+import mainpackage.model.Person;
 
 @Service
 public class PersonServiceImpl implements PersonService {

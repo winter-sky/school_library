@@ -1,6 +1,5 @@
-package com.journaldev.spring.model;
+package mainpackage.model;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.*;
 

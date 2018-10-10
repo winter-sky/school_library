@@ -1,6 +1,6 @@
-package com.journaldev.spring.service;
+package mainpackage.service;
 
-import com.journaldev.spring.dao.BooksDAO;
+import mainpackage.dao.BooksDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
