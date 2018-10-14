@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import mainpackage.model.Person;
 import mainpackage.service.PersonService;
@@ -186,5 +183,10 @@ public class PersonController {
         return "checkDeleteOrNot";
     }
 
+    @RequestMapping(value="/search_pupil_by_name",method = RequestMethod.POST)
+    public String search_pupil_by_name(@RequestParam("str") String str){
+        //TODO
+    this.pupilsService.searchPupilByName(str);
+        return "search_pupil_by_name";}
 
 }

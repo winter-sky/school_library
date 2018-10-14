@@ -1,6 +1,7 @@
 package mainpackage.service;
 
 import mainpackage.dao.PupilsDAO;
+import mainpackage.model.Pupils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,4 +16,8 @@ public class PupilsServiceImpl implements PupilsService {
     @Override
     @Transactional
     public boolean checkContainsOrNot(int pupilId){return this.pupilsDAO.checkContainsOrNot(pupilId);}
+
+    @Override
+    @Transactional
+    public Pupils searchPupilByName (String name){return this.pupilsDAO.searchPupilByName(name);}
 }

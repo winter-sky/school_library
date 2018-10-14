@@ -4,6 +4,7 @@ import mainpackage.model.Pupils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -33,5 +34,13 @@ public class PupilsDAOImpl implements PupilsDAO {
         Pupils pupil = (Pupils) query.uniqueResult();
 
         return pupilsList.contains(pupil);
+    }
+
+    @Override
+    public Pupils searchPupilByName (String name){
+        Session session = this.sessionFactory.getCurrentSession();
+        Pupils pupil = (Pupils)session.createCriteria(Pupils.class).add(Restrictions.like("name",
+                "%")).uniqueResult();
+        return pupil;
     }
 }

@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 
 import mainpackage.model.Person;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 @Repository
 public class PersonDAOImpl implements PersonDAO {
 
@@ -64,6 +66,7 @@ public class PersonDAOImpl implements PersonDAO {
 	@Override
 	public void updatePerson(Person p) {
 		Session session = this.sessionFactory.getCurrentSession();
+
 		session.update(p);
 		logger.info("Person updated successfully, Person Details="+p);
 	}
